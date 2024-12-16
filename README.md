@@ -70,3 +70,26 @@ Compiled file to execute the hadoop operation to carry out the DBSCAN clustering
 John_Vega_Output.txt (John Vega) 
 Shows all of the entire execution of hadoop map-reduce on both the crime data as well as the median home price data localized in the same geographic location to establish and display all of the data necessary to display the clusters on a choropleth map.
 
+
+
+
+
+COMMANDS IN ORDER:
+start-all.sh
+//starts the hadoop file system program initialization sequence
+
+hadoop fs -put cleaned_crime.csv /input
+// loads the data into the hadoop file system in order to prepare for mapreduce execution
+
+
+javac -classpath $(hadoop classpath) -d classes/ CrimeMapper.java CrimeReducer.java CrimeDBSCANDriver.java CrimePoint.java Cluster.java
+// compiles the classes into the hadoop classpath as the necessary initialization step and stores in a classes directory
+
+jar -cvf CrimeHotSpotsProject.jar -C classes/ .     
+// creates a jar file in order to prepare to execute the map reducer program
+
+hadoop jar CrimeHotSpotsProject.jar CrimeHotSpotsProject.CrimeDBSCANDriver /input/cleaned_crime.csv /output/clustered_crime_results_13
+// executes the program takin the established input from the /input directory and stores in the output subdirectory specified
+
+hdfs dfs -cat /output/clustered_crime_results_13/part-00000   
+// this command allows us to view the results of the hadoop map reduction based clustering executedhdf
