@@ -92,4 +92,4 @@ hadoop jar CrimeHotSpotsProject.jar CrimeHotSpotsProject.CrimeDBSCANDriver /inpu
 // executes the program takin the established input from the /input directory and stores in the output subdirectory specified
 
 hdfs dfs -cat /output/clustered_crime_results_13/part-00000   
-// this command allows us to view the results of the hadoop map reduction based clustering executedhdf
+// this command allows us to view the results of the hadoop map reduction based clustering executed
